@@ -38,7 +38,7 @@ public class Main {
 		
 		HttpResponse<String> response = hClient.send(requestData, HttpResponse.BodyHandlers.ofString());
 		System.out.println(response.body());
-//		
+		
 		//https://mkyong.com/java/how-to-enable-pretty-print-json-output-gson/
 		
 	//	Gson gson=new Gson(); //print all data in one line then insert
@@ -50,7 +50,6 @@ public class Main {
 		JsonParser jParser = new JsonParser(); //import from library
 		JsonElement jElement = jParser.parse(response.body());   //previous string (up) that json shape. import library 
 		String jsonString = gson.toJson(jElement);
-		
 		System.out.println(jsonString);
 		
 		JsonApi[] data = gson.fromJson(jsonString, JsonApi[].class);  //to take data from JsonApi class
@@ -189,7 +188,7 @@ public class Main {
 	
 	public static void updateByIdInDbApi() {
 		
-/*		String url = "jdbc:mysql://localhost:3306/apidb";
+		String url = "jdbc:mysql://localhost:3306/apidb";
 		String user = "root";
 	    String pass = "10@104Ar$";
 	    
@@ -229,7 +228,7 @@ public class Main {
  			 System.out.println("Enter the id of the row to update:");
  	        	int api_id=in.nextInt();
  	        	
- 	        	String sql = "update Api web_pages = ?, state_province = ?, alpha_two_code =?, name =?, country=?, domains=? where api_id = ?";
+ 	        	String sql = "update Api set web_pages = ?, state_province = ?, alpha_two_code =?, name =?, country=?, domains=? where api_id = ?";
  				PreparedStatement pstmt = (PreparedStatement) con.prepareStatement(sql);
  				
  				System.out.println("enter web_pages to be updated:");
@@ -261,29 +260,62 @@ public class Main {
  				if (rs.next()) {
  					String web_pagess = rs.getString("web_pages");
  					String state_provincee = rs.getString("state_province");
- 					String alpha_two_codee = rs.getString("created_date");
+ 					String alpha_two_codee = rs.getString("alpha_two_code");
  					String namee = rs.getString("name");
  					String countryy = rs.getString("country");
  					String domainss = rs.getString("domains");
  					
- 					System.out.println("id:"+api_id + ", web_pages:" + web_pages + ", state_province:" + state_provincee + ", alpha_two_code:" + alpha_two_codee + ", name:" + namee + ", country:" + countryy+ ", domains:" + domainss);
+ 					System.out.println("api_id:"+api_id + ", web_pages:" + web_pagess + ", state_province:" + state_provincee + ", alpha_two_code:" + alpha_two_codee + ", name:" + namee + ", country:" + countryy+ ", domains:" + domainss);
  				}
  			} catch (Exception e) {
  				System.out.println(e);
- 			} */
+ 			} 
  		}
 
 	
 	public static void main(String[] args) throws IOException, InterruptedException { //can use try and catch or this throws keyword
 		
-	//	insertValuesByApiInDB();
-	//	readValuesFromDbApi();
-	//	deleteByIdInDbApi();
-		updateByIdInDbApi();
+		Scanner in = new Scanner(System.in);
 		
+		while(true) {
+		System.out.println(" Json->api->save the data to db ");
+		System.out.println("*******************************");
+		System.out.println("Menu:");
+		System.out.println("0:insert values of json by api in db table.");
+		System.out.println("1:read values from db (Api).");
+		System.out.println("2:delete by id in db (Api).");
+		System.out.println("3:update by id in db (Api).");
+		System.out.println("4:Exit.");
+		System.out.println("*******************************");
+		System.out.println("Enter a number from menu: ");
+		int choice=in.nextInt();
 		
-     
-		
+		switch(choice) {
+		case 0:{
+		  insertValuesByApiInDB();
+		  System.out.println("*******************************");
+		  break;
+		}case 1:{
+		  readValuesFromDbApi();
+		  System.out.println("*******************************");
+		  break;
+		}case 2:{
+		  deleteByIdInDbApi();
+		  System.out.println("*******************************");
+		  break;
+		}case 3:{
+		  updateByIdInDbApi();	
+		  System.out.println("*******************************");
+		  break;
+		}case 4:{
+			return;
+		}default:{
+			System.out.println("it is not an option, try again.");
+			System.out.println("*******************************");
+			break;
+		}
+		}}
+			
 
 	}
 

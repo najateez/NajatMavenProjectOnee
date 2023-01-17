@@ -12,8 +12,6 @@ public class JsonApi {
 		private String country;
 		private String [] domains; //[] list of. shows from json.
 		
-		
-		
 		public int getApi_id() {
 			return api_id;
 		}

@@ -9,7 +9,7 @@ public class JsonApiTable {
 	
 	//json which is given put it in json formatter -> take values from json used api -> save api values in db.
 	
-		public static void isApiJsonTableCreated() {
+		public static void isJsonApiTableCreated() {
 			
 			String url = "jdbc:mysql://localhost:3306/apidb";
 			 String user = "root";
@@ -51,7 +51,7 @@ public class JsonApiTable {
 
 	public static void main(String[] args) {
 		
-		isApiJsonTableCreated();
+		isJsonApiTableCreated();
 		
 
 	}
